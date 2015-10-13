@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace twozerofoureight
 {
     public partial class TwoZeroFourEightView : Form, View
@@ -18,8 +19,13 @@ namespace twozerofoureight
         public TwoZeroFourEightView()
         {
             InitializeComponent();
+            ScoreView sc = new ScoreView();
+            sc.Visible = true;
+            sc.Enabled = true;
+
             model = new TwoZeroFourEightModel();
             model.AttachObserver(this);
+            model.AttachObserver(sc);
             controller = new TwoZeroFourEightController();
             controller.AddModel(model);
             controller.ActionPerformed(TwoZeroFourEightController.LEFT);
@@ -75,27 +81,41 @@ namespace twozerofoureight
             UpdateTile(lbl31,board[3, 1]);
             UpdateTile(lbl32,board[3, 2]);
             UpdateTile(lbl33,board[3, 3]);
-        }
+            label1.Text = ((TwoZeroFourEightModel)model).score.ToString();
 
+        }
         private void btnLeft_Click(object sender, EventArgs e)
         {
             controller.ActionPerformed(TwoZeroFourEightController.LEFT);
+        
         }
 
         private void btnRight_Click(object sender, EventArgs e)
         {
             controller.ActionPerformed(TwoZeroFourEightController.RIGHT);
+      
         }
 
         private void btnUp_Click(object sender, EventArgs e)
         {
             controller.ActionPerformed(TwoZeroFourEightController.UP);
+         
         }
 
         private void btnDown_Click(object sender, EventArgs e)
         {
             controller.ActionPerformed(TwoZeroFourEightController.DOWN);
+          
         }
 
+        private void TwoZeroFourEightView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl00_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
